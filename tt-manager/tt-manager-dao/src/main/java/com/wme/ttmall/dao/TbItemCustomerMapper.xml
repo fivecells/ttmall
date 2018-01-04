@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wme.ttmall.dao.TbItemCustomerMapper" >
+  
+  <sql id="Base_Column_List" >
+    i.id, i.title, i.sell_point as sellpoint, i.price, i.num, i.barcode, i.image, i.cid,
+    case i.status
+        when 1 then '正常'
+        when 2 then '下架'
+        when 3 then '删除'
+        ELSE '未知' end as statusName
+    , i.created,
+     i.updated,c.name as catName
+  </sql>
+  <select id="listItemsByPage" resultType="com.wme.ttmall.pojo.vo.TbItemCustomer">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from tb_item i left join tb_item_cat c on i.cid=c.id
+    where i.status !=3
+    ORDER by i.id DESC
+    limit #{offset},#{rows}
+  </select>
+  <select id="countItems" resultType="_long">
+      SELECT
+      count(*)
+      from tb_item
+      where status !=3
+  </select>
+</mapper>
