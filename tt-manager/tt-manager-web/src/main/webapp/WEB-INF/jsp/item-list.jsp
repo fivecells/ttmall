@@ -130,7 +130,8 @@
             //     }},
             {field:'catName',title:'分类名称',width:80},
             {field:'created',title:'创建日期',formatter:function(v,r,i){
-                    return moment(v).format('l');}}
+                    return moment(v).format('l');}},
+            {field:'privceView',title:'价格'}
         ]]
     })
 </script>

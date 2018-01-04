@@ -3,7 +3,7 @@
 <mapper namespace="com.wme.ttmall.dao.TbItemCustomerMapper" >
   
   <sql id="Base_Column_List" >
-    i.id, i.title, i.sell_point as sellpoint, i.price, i.num, i.barcode, i.image, i.cid,
+    i.id, i.title, i.sell_point as sellpoint, format(i.price/100,2) AS privceView, i.num, i.barcode, i.image, i.cid,
     case i.status
         when 1 then '正常'
         when 2 then '下架'
